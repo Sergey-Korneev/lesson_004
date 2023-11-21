@@ -12,7 +12,6 @@ import simple_draw as sd
 # - точка начала рисования
 # - угол наклона
 # - длина стороны
-#
 # Использование копи-пасты - обязательно! Даже тем кто уже знает про её пагубность. Для тренировки.
 # Как работает копипаста:
 #   - одну функцию написали,
@@ -21,13 +20,24 @@ import simple_draw as sd
 #   - и так далее.
 # В итоге должен получиться ПОЧТИ одинаковый код в каждой функции
 
+def draw_figur(point, angle, length, count_start, count_end):
+    if count_start < count_end:
+        v1 = sd.get_vector(start_point=point, angle=angle, length=length)
+        v1.draw()
+        count_start += 1
+        angle += 360/count_end
+        draw_figur(point=v1.end_point, angle=angle, length=length,
+                   count_start=count_start, count_end=count_end)
+    elif count_start > count_end:
+        return None
+
+draw_figur(point=sd.get_point(50, 50), angle=0, length=100, count_start=0, count_end=3)
+
 # Пригодятся функции
 # sd.get_point()
 # sd.get_vector()
 # sd.line()
 # Результат решения см lesson_004/results/exercise_01_shapes.jpg
-
-# TODO здесь ваш код
 
 # Часть 1-бис.
 # Попробуйте прикинуть обьем работы, если нужно будет внести изменения в этот код.
